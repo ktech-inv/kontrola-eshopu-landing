@@ -9,30 +9,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TK6W3SX28Y"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-TK6W3SX28Y');
-</script>
-
-<!-- Meta Pixel -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window,document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1799620708055955');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1799620708055955&ev=PageView&noscript=1"/></noscript>
+<!--
+  Google Analytics 4 (G-TK6W3SX28Y) a Meta Pixel (1799620708055955)
+  se NENACITAJI pri nacteni stranky. Skripty vklada az funkce ccLoadTracking()
+  v cookie liste na konci <body>, a to vyhradne po udeleni souhlasu
+  (§ 89 odst. 3 zak. c. 127/2005 Sb., cl. 6 GDPR).
+  Z tehoz duvodu tu neni ani <noscript> pixel na facebook.com/tr —
+  ten by se odesilal mimo souhlas.
+-->
 
 <style>
 :root{
@@ -201,6 +185,40 @@ details p{color:var(--gray);margin-top:12px;font-size:.95rem;max-width:70ch}
 footer{border-top:1px solid var(--border);padding:36px 0;color:var(--gray);font-size:.87rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between}
 footer a{color:var(--gray2)}
+
+/* ---------- COOKIE LIŠTA ---------- */
+.cc-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:9999;display:none;
+  background:var(--navy2);border-top:1px solid var(--border-amber);
+  box-shadow:0 -10px 40px rgba(0,0,0,.5);padding:22px 0;
+}
+.cc-bar.cc-show{display:block}
+.cc-inner{
+  max-width:1080px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;
+}
+.cc-text{flex:1 1 380px;font-size:.87rem;line-height:1.6;color:var(--gray2)}
+.cc-text strong{
+  display:block;font-family:'Syne';font-weight:800;font-size:1rem;
+  color:var(--white);margin-bottom:5px;
+}
+.cc-text a{color:var(--amber2);text-decoration:underline}
+.cc-text a:hover{color:var(--white)}
+.cc-actions{display:flex;gap:12px;flex:none}
+/* Obě tlačítka záměrně sdílejí stejný styl i rozměr —
+   odmítnutí musí být stejně snadné a nápadné jako souhlas. */
+.cc-btn{
+  flex:1 1 0;min-width:150px;padding:.72rem 1.6rem;
+  font-family:'DM Sans',system-ui,sans-serif;font-weight:500;font-size:.95rem;line-height:1.2;
+  text-align:center;color:var(--white);background:var(--navy3);
+  border:1px solid var(--border-amber);border-radius:10px;cursor:pointer;
+  transition:background .2s,border-color .2s,transform .2s;
+}
+.cc-btn:hover{background:var(--amber);border-color:var(--amber);color:#221800;transform:translateY(-2px)}
+@media(max-width:760px){
+  .cc-inner{gap:16px}
+  .cc-actions{width:100%}
+}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 :focus-visible{outline:2px solid var(--amber2);outline-offset:3px;border-radius:4px}
@@ -432,6 +450,7 @@ footer a{color:var(--gray2)}
     <div>
       <a href="https://kaitechinvest.com/vop.html">Obchodní podmínky</a> ·
       <a href="https://kaitechinvest.com/gdpr.html">Ochrana osobních údajů</a> ·
+      <a href="#" id="ccSettings">Nastavení cookies</a> ·
       <a href="mailto:info@kaitechinvest.com">info@kaitechinvest.com</a>
     </div>
   </div>
@@ -451,6 +470,114 @@ document.querySelectorAll('a[data-plan]').forEach(function(a){
     }
   });
 });
+</script>
+
+<!-- COOKIE LIŠTA -->
+<div class="cc-bar" id="ccBar" role="dialog" aria-live="polite" aria-label="Nastavení cookies" aria-describedby="ccText">
+  <div class="cc-inner">
+    <div class="cc-text" id="ccText">
+      <strong>Cookies a měření návštěvnosti</strong>
+      Technicky nutné cookies pro fungování webu používáme vždy. Analytické a marketingové
+      nástroje (Google Analytics, Meta Pixel) načteme až s vaším souhlasem — do té doby
+      se žádný jejich skript nespustí. Souhlas můžete kdykoli změnit odkazem
+      „Nastavení cookies“ v patičce. Více v
+      <a href="https://kaitechinvest.com/gdpr.html">Ochraně osobních údajů</a>.
+    </div>
+    <div class="cc-actions">
+      <button type="button" class="cc-btn" id="ccReject">Odmítnout</button>
+      <button type="button" class="cc-btn" id="ccAccept">Přijmout</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'kai_cookie_consent';
+  var GA_ID = 'G-TK6W3SX28Y';
+  var FB_ID = '1799620708055955';
+  var bar = document.getElementById('ccBar');
+  var loaded = false;
+
+  function readConsent(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      var val = JSON.parse(raw);
+      return (val && typeof val.analytics === 'boolean') ? val : null;
+    } catch (e) { return null; }
+  }
+
+  function saveConsent(granted){
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        analytics: granted,
+        ts: new Date().toISOString(),
+        v: 1
+      }));
+    } catch (e) { /* private mode – volba platí jen pro tuto relaci */ }
+  }
+
+  // Skripty třetích stran se vkládají výhradně odsud, tedy až po souhlasu.
+  function ccLoadTracking(){
+    if (loaded) return;
+    loaded = true;
+
+    // Google Analytics 4
+    var ga = document.createElement('script');
+    ga.async = true;
+    ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(ga);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ window.dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+
+    // Meta Pixel
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', FB_ID);
+    fbq('track', 'PageView');
+  }
+
+  function showBar(){ bar.classList.add('cc-show'); }
+  function hideBar(){ bar.classList.remove('cc-show'); }
+
+  document.getElementById('ccAccept').addEventListener('click', function(){
+    saveConsent(true);
+    hideBar();
+    ccLoadTracking();
+  });
+
+  document.getElementById('ccReject').addEventListener('click', function(){
+    saveConsent(false);
+    hideBar();
+    // Nic se nenačítá; window.fbq ani window.gtag nevzniknou,
+    // takže i pozdější událostní volání na stránce jen tiše propadnou.
+  });
+
+  // Znovuotevření z patičky
+  var settings = document.getElementById('ccSettings');
+  if (settings) {
+    settings.addEventListener('click', function(e){
+      e.preventDefault();
+      showBar();
+      document.getElementById('ccReject').focus();
+    });
+  }
+
+  var consent = readConsent();
+  if (consent === null) {
+    showBar();
+  } else if (consent.analytics) {
+    ccLoadTracking();
+  }
+})();
 </script>
 
 </body>
